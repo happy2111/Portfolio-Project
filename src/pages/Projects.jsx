@@ -19,7 +19,7 @@ const Projects = () => {
     setLoading(true);
     axios
       .get(
-        `/api/projects/?search=${searchText}&page=${currentPage}&page_size=${pageSize}`
+        `https://shoxakong.pythonanywhere.com/projects/?search=${searchText}&page=${currentPage}&page_size=${pageSize}`
       )
       .then((res) => {
         setProjects(res.data.results);
