@@ -16,7 +16,7 @@ export const Login = () => {
     e.preventDefault();
     setLoading(true);
     axios
-      .post("/api/login/", { email, password })
+      .post("https://shoxakong.pythonanywhere.com/login/", { email, password })
       .then((res) => {
         if (res.status >= 200 && res.status < 300) {
           localStorage.setItem("token", res.data.access_token);
