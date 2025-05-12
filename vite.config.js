@@ -8,13 +8,14 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     host: "0.0.0.0",
-    /*
+   /* 
     proxy: {
       "/api": {
         target: "https://shoxakong.pythonanywhere.com",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
       },
-    }, */
+    }, 
+    */
   },
 });

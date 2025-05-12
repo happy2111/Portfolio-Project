@@ -36,7 +36,9 @@ const ProjectDetails = () => {
 
       const result = await Promise.all(
         contributors.map(async (i) => {
-          const res = await axios.get(`/api/project-contributors/${i}/`);
+          const res = await axios.get(
+            `https://shoxakong.pythonanywhere.com/project-contributors/${i}/`
+          );
           return res.data;
         })
       );

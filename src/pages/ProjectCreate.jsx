@@ -487,13 +487,6 @@ const ProjectCreate = () => {
                 <h1 className="text-2xl md:text-3xl font-bold mb-6">
                   A'zolarni qo'shish
                 </h1>
-                {errors && (
-                  <div className="text-red-500 mb-4">
-                    {errors.split("\n").map((error, index) => (
-                      <p key={index}>{error}</p>
-                    ))}
-                  </div>
-                )}
                 <button
                   type="button"
                   onClick={() => setAddMenuOpen(true)} // Open modal
