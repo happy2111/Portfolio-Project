@@ -84,6 +84,7 @@ const ProjectCreate = () => {
       );
       console.log(res);
       if (res.status === 201) {
+        setErrors("");
         setCorrect(true);
         setTimeout(() => {
           setCorrect(false);
@@ -144,13 +145,31 @@ const ProjectCreate = () => {
       setEmail("");
       setGithubLink("");
       setLinkedinLink("");
+      setErrors("");
       return res.data.id;
     } catch (err) {
       console.error(
         "Ошибка при создании участника:",
         err.response?.data || err.message
       );
-      setErrors(err.response?.data || "Произошла ошибка.");
+
+      // Обработка ошибок
+      if (err.response?.data) {
+        const errorMessages = [];
+        for (const key in err.response.data) {
+          if (err.response.data.hasOwnProperty(key)) {
+            const errors = err.response.data[key];
+            errorMessages.push(`${key}: ${errors.join(", ")}`);
+          }
+        }
+        setErrors(errorMessages.join("\n")); // Устанавливаем ошибки для отображения в UI
+      } else {
+        setErrors("Произошла ошибка.");
+      }
+
+      if (err.response?.status === 401) {
+        navigate("/auth", { replace: "/" });
+      }
     } finally {
       setContriLoader(false);
     }
@@ -468,6 +487,13 @@ const ProjectCreate = () => {
                 <h1 className="text-2xl md:text-3xl font-bold mb-6">
                   A'zolarni qo'shish
                 </h1>
+                {errors && (
+                  <div className="text-red-500 mb-4">
+                    {errors.split("\n").map((error, index) => (
+                      <p key={index}>{error}</p>
+                    ))}
+                  </div>
+                )}
                 <button
                   type="button"
                   onClick={() => setAddMenuOpen(true)} // Open modal
