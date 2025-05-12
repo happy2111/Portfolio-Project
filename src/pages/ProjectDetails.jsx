@@ -16,7 +16,9 @@ const ProjectDetails = () => {
 
   const GetProjects = async () => {
     try {
-      const res = await axios.get("/api/projects/" + id + "/");
+      const res = await axios.get(
+        "https://shoxakong.pythonanywhere.com/projects/" + id + "/"
+      );
       setData(res.data);
       return res.data.contributors;
     } catch (err) {

@@ -23,7 +23,9 @@ const Profile = () => {
 
   const handleProject = async (id) => {
     try {
-      const res = await axios.get(`/api/project_user/${id}/`);
+      const res = await axios.get(
+        `https://shoxakong.pythonanywhere.com/project_user/${id}/`
+      );
       console.log(res.data);
     } catch (err) {
       console.log(err);
@@ -32,7 +34,7 @@ const Profile = () => {
   useEffect(() => {
     if (!checkAuth()) return;
     axios
-      .get("/api/profile/", {
+      .get("https://shoxakong.pythonanywhere.com/profile/", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

@@ -20,7 +20,7 @@ export const Login = () => {
       .then((res) => {
         if (res.status >= 200 && res.status < 300) {
           localStorage.setItem("token", res.data.access_token);
-          navigate("/profile", { replace: true });
+          navigate("/", { replace: true });
         }
       })
       .catch((err) => {

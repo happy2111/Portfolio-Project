@@ -21,7 +21,7 @@ const RegistrationPage = () => {
     e.preventDefault();
     setLoading(true);
     axios
-      .post("/api/register/", {
+      .post("https://shoxakong.pythonanywhere.com/register/", {
         email,
         password,
         password_confirm: passwordConf,
@@ -30,30 +30,30 @@ const RegistrationPage = () => {
         phone_number: phone,
       })
       .then((res) => {
-          if (res.status >= 200 && res.status < 300) {
-            console.log(res)
-            localStorage.setItem("token", res.data.access_token);
-            navigate("/auth/login", { replace: true});
-          }
+        if (res.status >= 200 && res.status < 300) {
+          console.log(res);
+          localStorage.setItem("token", res.data.access_token);
+          navigate("/auth/login", { replace: true });
+        }
       })
       .catch((err) => {
         if (err.response?.data?.password) {
-          setInpError("password")
+          setInpError("password");
           setError(err.response?.data?.password[0]); // Отображаем первую ошибку для пароля
         } else if (err.response?.data?.email) {
-          setInpError("email")
+          setInpError("email");
           setError(err.response?.data?.email[0]); // Отображаем первую ошибку для email
         } else if (err.response?.data?.phone_number) {
-          setInpError("phone")
+          setInpError("phone");
           setError(err.response?.data?.phone_number[0]); // Отображаем первую ошибку для номера телефона
         } else if (err.response?.data?.first_name) {
-          setInpError("first_name")
+          setInpError("first_name");
           setError(err.response?.data?.first_name[0]); // Отображаем первую ошибку для имени
         } else if (err.response?.data?.last_name) {
-          setInpError("last_name")
+          setInpError("last_name");
           setError(err.response?.data?.last_name[0]);
         } else if (err.response?.data?.password_confirm) {
-          setInpError("password_confirm")
+          setInpError("password_confirm");
           setError(err.response?.data?.password_confirm[0]);
         } else {
           setError(

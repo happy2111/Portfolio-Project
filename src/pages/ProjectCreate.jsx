@@ -73,11 +73,15 @@ const ProjectCreate = () => {
         git_hub: git_hub,
         deploy_link: deploy_link,
       };
-      const res = await axios.post("/api/projects/", projectData, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const res = await axios.post(
+        "https://shoxakong.pythonanywhere.com/projects/",
+        projectData,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
       console.log(res);
       if (res.status === 201) {
         setCorrect(true);
@@ -112,9 +116,13 @@ const ProjectCreate = () => {
         linkedin_link: linkedinLink,
         position: position,
       };
-      const res = await axios.post("/api/project-contributors/", contrData, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      });
+      const res = await axios.post(
+        "https://shoxakong.pythonanywhere.com/project-contributors/",
+        contrData,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      );
       seMembers((prev) => [...prev, res.data]);
       setAddMenuOpen(false);
       setFullName("");
@@ -136,11 +144,14 @@ const ProjectCreate = () => {
 
   const deleteProjectContributor = async (id) => {
     try {
-      await axios.delete(`/api/project-contributors/${id}/`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      await axios.delete(
+        `https://shoxakong.pythonanywhere.com/project-contributors/${id}/`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
 
       seMembers((prevMembers) =>
         prevMembers.filter((member) => member.id !== id)
@@ -174,7 +185,7 @@ const ProjectCreate = () => {
         position: position,
       };
       const res = await axios.patch(
-        `/api/project-contributors/${selectedMember.id}/`,
+        `https://shoxakong.pythonanywhere.com/project-contributors/${selectedMember.id}/`,
         contrData,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -224,7 +235,7 @@ const ProjectCreate = () => {
       // Make separate requests for each contributor
       const requests = contributorIds.map((contributorId) =>
         axios.post(
-          "/api/project_user/",
+          "https://shoxakong.pythonanywhere.com/project_user/",
           {
             project: projectId,
             contributor: contributorId,

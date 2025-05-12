@@ -10,11 +10,10 @@ const Contact = () => {
   const [email, setEmail] = useState("");
   const [message, setMesage] = useState("");
   const [isLoading, setLoading] = useState(false);
-  const [errors, setErrors] = useState("")
-  const navigate = useNavigate()
+  const [errors, setErrors] = useState("");
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
-    if (!localStorage.getItem('token')) 
-      navigate("/auth");
+    if (!localStorage.getItem("token")) navigate("/auth");
     setLoading(true);
     e.preventDefault();
     const formData = {
@@ -22,35 +21,36 @@ const Contact = () => {
       email: email,
       message: message,
     };
-    axios.post("/api/contacts/", formData, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}` 
-      }
-    })
-    .then((res) => {
-      if(res.status >= 200 && res.status < 300) {
-        alert("Xabaringiz muvaffaqiyatli yuborildi!");
-        setName("");
-        setEmail("");
-        setMesage("");
-        setErrors("");
-      }
+    axios
+      .post("https://shoxakong.pythonanywhere.com/contacts/", formData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        if (res.status >= 200 && res.status < 300) {
+          alert("Xabaringiz muvaffaqiyatli yuborildi!");
+          setName("");
+          setEmail("");
+          setMesage("");
+          setErrors("");
+        }
 
-      console.log(res.data);
-    })
-    .catch((err) => {
-      let error = err.response.data; 
-      if(error.email) {
-        setErrors("email")
-      }else if (error.name){
-        setErrors("name")
-      }else if (error.message) {
-        setErrors("message")
-      }
-    })
-    .finally(() => {
-      setLoading(false)
-    })
+        console.log(res.data);
+      })
+      .catch((err) => {
+        let error = err.response.data;
+        if (error.email) {
+          setErrors("email");
+        } else if (error.name) {
+          setErrors("name");
+        } else if (error.message) {
+          setErrors("message");
+        }
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
   return (
     <section id="contact" className="font-[Baumans]">

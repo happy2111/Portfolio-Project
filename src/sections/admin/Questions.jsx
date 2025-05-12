@@ -8,7 +8,7 @@ const Questions = () => {
   const [data, setData] = useState([])
   useEffect(() => {
     axios
-      .get("/api/contacts/", {
+      .get("https://shoxakong.pythonanywhere.com/contacts/", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
