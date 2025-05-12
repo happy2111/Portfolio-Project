@@ -97,7 +97,21 @@ const ProjectCreate = () => {
         "Ошибка при создании проекта:",
         err.response?.data || err.message
       );
-      setErrors(err.response?.data || "Произошла ошибка.");
+
+      // Обработка ошибок
+      if (err.response?.data) {
+        const errorMessages = [];
+        for (const key in err.response.data) {
+          if (err.response.data.hasOwnProperty(key)) {
+            const errors = err.response.data[key];
+            errorMessages.push(`${key}: ${errors.join(", ")}`);
+          }
+        }
+        setErrors(errorMessages.join("\n")); // Устанавливаем ошибки для отображения в UI
+      } else {
+        setErrors("Произошла ошибка.");
+      }
+
       if (err.response?.status === 401) {
         navigate("/auth", { replace: "/" });
       }
@@ -292,7 +306,13 @@ const ProjectCreate = () => {
               <h1 className="text-2xl md:text-3xl font-bold mb-6">
                 Loyiha yaratish
               </h1>
-              {errors && <div className="text-red-500 mb-4">{errors}</div>}
+              {errors && (
+                <div className="text-red-500 mb-4">
+                  {errors.split("\n").map((error, index) => (
+                    <p key={index}>{error}</p>
+                  ))}
+                </div>
+              )}
 
               <div className="top flex max-sm:flex-col gap-[17px] items-start max-sm:items-center ">
                 <button
