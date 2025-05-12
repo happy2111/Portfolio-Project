@@ -46,7 +46,7 @@ const Projects = () => {
       <nav className="bg-[#50C9CE80] mb-[30px] h-[55px]  flex items-center max-md:px-[10px]">
         <div className="container flex justify-between  items-center max-md:px-[20px]">
           <Link
-            onClick={() => navigate(-1)}
+            onClick={() => navigate("/")}
             className="border-2  hover:opacity-75 border-[#FF8888] bg-[#FF000033] text-[20px] text-[#FF8888] sm:px-[41px] px-4 rounded-[10px]"
           >
             {window.innerWidth > 660 ? "Orqaga" : "<"}
