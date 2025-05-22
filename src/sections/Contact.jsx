@@ -22,7 +22,7 @@ const Contact = () => {
       message: message,
     };
     axios
-      .post("https://shoxakong.pythonanywhere.com/contacts/", formData, {
+      .post("https://api.portfolio2.uz/contacts/", formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

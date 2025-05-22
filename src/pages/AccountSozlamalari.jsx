@@ -42,7 +42,7 @@ const AccountSozlamalari = () => {
   const handleProject = async (id) => {
     try {
       const res = await axios.get(
-        `https://shoxakong.pythonanywhere.com/project_user/${id}/`
+        `https://api.portfolio2.uz/project_user/${id}/`
       );
       console.log(res.data);
     } catch (err) {
@@ -53,7 +53,7 @@ const AccountSozlamalari = () => {
   useEffect(() => {
     if (!checkAuth()) return;
     axios
-      .get("https://shoxakong.pythonanywhere.com/profile/", {
+      .get("https://api.portfolio2.uz/profile/", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

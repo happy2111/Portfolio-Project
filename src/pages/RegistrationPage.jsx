@@ -21,7 +21,7 @@ const RegistrationPage = () => {
     e.preventDefault();
     setLoading(true);
     axios
-      .post("https://shoxakong.pythonanywhere.com/register/", {
+      .post("https://api.portfolio2.uz/register/", {
         email,
         password,
         password_confirm: passwordConf,

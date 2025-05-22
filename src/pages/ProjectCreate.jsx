@@ -74,7 +74,7 @@ const ProjectCreate = () => {
         deploy_link: deploy_link,
       };
       const res = await axios.post(
-        "https://shoxakong.pythonanywhere.com/projects/",
+        "https://api.portfolio2.uz/projects/",
         projectData,
         {
           headers: {
@@ -132,7 +132,7 @@ const ProjectCreate = () => {
         position: position,
       };
       const res = await axios.post(
-        "https://shoxakong.pythonanywhere.com/project-contributors/",
+        "https://api.portfolio2.uz/project-contributors/",
         contrData,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -178,7 +178,7 @@ const ProjectCreate = () => {
   const deleteProjectContributor = async (id) => {
     try {
       await axios.delete(
-        `https://shoxakong.pythonanywhere.com/project-contributors/${id}/`,
+        `https://api.portfolio2.uz/project-contributors/${id}/`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -218,7 +218,7 @@ const ProjectCreate = () => {
         position: position,
       };
       const res = await axios.patch(
-        `https://shoxakong.pythonanywhere.com/project-contributors/${selectedMember.id}/`,
+        `https://api.portfolio2.uz/project-contributors/${selectedMember.id}/`,
         contrData,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -268,7 +268,7 @@ const ProjectCreate = () => {
       // Make separate requests for each contributor
       const requests = contributorIds.map((contributorId) =>
         axios.post(
-          "https://shoxakong.pythonanywhere.com/project_user/",
+          "https://api.portfolio2.uz/project_user/",
           {
             project: projectId,
             contributor: contributorId,
